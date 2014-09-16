@@ -1,0 +1,9 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+	ignorecase = true
+[remote "origin"]
+	url = https://github.com/vvakame/dotfiles.git
+	fetch = +refs/*:refs/*
+	mirror = true
