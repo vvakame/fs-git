@@ -1,0 +1,5 @@
+class FSGit {
+
+}
+
+export = FSGit;
