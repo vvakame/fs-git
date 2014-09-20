@@ -35,3 +35,6 @@ wiki/
 bin/out/
 tscommand.tmp.txt
 .baseDir.ts
+
+# for test
+test/fixture/vanilla
