@@ -100,6 +100,34 @@ module.exports = function (grunt) {
                 ]
             }
         },
+        replace: {
+            definitions: {
+                src: ['<%= opt.client.jsMainOut %>/fs.d.ts'],
+                dest: 'fs-git.d.ts',
+                replacements: [
+                    {
+                        from: /^\/\/\/.*$/gm,
+                        to: ''
+                    },
+                    {
+                        from: /declare /gm,
+                        to: ''
+                    },
+                    {
+                        from: /export /gm,
+                        to: ''
+                    },
+                    {
+                        from: /^/g,
+                        to: '\ndeclare module "fs-git" {\n'
+                    },
+                    {
+                        from: /$/g,
+                        to: '\n}\n'
+                    }
+                ]
+            }
+        },
         mochaTest: {
             test: {
                 options: {
