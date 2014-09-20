@@ -20,7 +20,7 @@ module.exports = function (grunt) {
                 target: 'es5',                 // target javascript language. [es3 (default) | es5]
                 module: 'commonjs',            // target javascript module style. [amd (default) | commonjs]
                 noImplicitAny: true,
-                sourceMap: false,              // generate a source map for every output js file. [true (default) | false]
+                sourceMap: true,              // generate a source map for every output js file. [true (default) | false]
                 sourceRoot: '',                // where to locate TypeScript files. [(default) '' == source ts location]
                 mapRoot: '',                   // where to locate .map.js files. [(default) '' == generated js location.]
                 declaration: false             // generate a declaration .d.ts file for every output js file. [true | false (default)]
