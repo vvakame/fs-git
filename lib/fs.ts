@@ -48,14 +48,22 @@ export class FSGit {
         });
     }
 
-    readFile(path:string, opts?:{encoding: string;}):Promise<string> {
+    readFile(path:string):Promise<Buffer>;
+
+    readFile(path:string, opts:{encoding: string;}):Promise<string>;
+
+    readFile(path:string, opts?:{encoding: string;}):Promise<any> {
         var command = this._buildCommand("show", this.ref + ":" + path);
-        return new Promise((resolve:(value:string)=>void, reject:(error:any)=>void) => {
+        return new Promise((resolve:(value:any)=>void, reject:(error:any)=>void) => {
             child_process.exec(command, (error, stdout, stderr)=> {
                 if (error) {
                     reject(error);
                 } else {
-                    resolve(stdout.toString("utf8"));
+                    if (opts && opts.encoding) {
+                        resolve(stdout.toString(opts.encoding));
+                    } else {
+                        resolve(stdout);
+                    }
                 }
             });
         });
@@ -75,17 +83,4 @@ export interface IFileInfo {
     type: string;
     hash: string;
     path: string;
-}
-
-export class Stats {
-    constructor(public fileInfo:IFileInfo) {
-    }
-
-    isFile():boolean {
-        return null;
-    }
-
-    isDirectory():boolean {
-        return null;
-    }
 }
