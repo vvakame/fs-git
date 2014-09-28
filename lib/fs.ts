@@ -36,6 +36,8 @@ export class FSGit {
                     var resultList:IFileInfo[] = list.map(str=> {
                         var matches = str.match(/^([0-9]+)\s([^\s]+)\s([0-9a-f]+)\t(.+)$/);
                         return {
+                            gitDir: this.path,
+                            ref: this.ref,
                             permission: matches[1],
                             type: matches[2],
                             hash: matches[3],
@@ -79,6 +81,8 @@ export class FSGit {
 }
 
 export interface IFileInfo {
+    gitDir: string;
+    ref: string;
     permission: string;
     type: string;
     hash: string;

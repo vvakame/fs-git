@@ -18,6 +18,8 @@ declare module "fs-git" {
         public _buildCommand(...args:string[]):string;
     }
     interface IFileInfo {
+        gitDir: string;
+        ref: string;
         permission: string;
         type: string;
         hash: string;
