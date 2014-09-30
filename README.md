@@ -1,4 +1,4 @@
-# fs-git
+# fs-git [![Circle CI](https://circleci.com/gh/vvakame/fs-git.png?style=badge)](https://circleci.com/gh/vvakame/fs-git)
 
 file system like api for git repository
 
