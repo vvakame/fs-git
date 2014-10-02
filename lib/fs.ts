@@ -26,26 +26,28 @@ export class FSGit {
     }
 
     filelist():Promise<IFileInfo[]> {
-        var command = this._buildCommand("ls-tree", "-r", "-z", "--full-name", this.ref);
-        return new Promise((resolve:(value:IFileInfo[])=>void, reject:(error:any)=>void) => {
-            child_process.exec(command, (error, stdout, stderr)=> {
-                if (error) {
-                    reject(error);
-                } else {
-                    var list = stdout.toString("utf8").split("\0").filter(str => str.length !== 0);
-                    var resultList:IFileInfo[] = list.map(str=> {
-                        var matches = str.match(/^([0-9]+)\s([^\s]+)\s([0-9a-f]+)\t(.+)$/);
-                        return {
-                            gitDir: this.path,
-                            ref: this.ref,
-                            permission: matches[1],
-                            type: matches[2],
-                            hash: matches[3],
-                            path: matches[4]
-                        };
-                    });
-                    resolve(resultList);
-                }
+        return this.revParse(this.ref).then(ref=> {
+            var command = this._buildCommand("ls-tree", "-r", "-z", "--full-name", this.ref);
+            return new Promise((resolve:(value:IFileInfo[])=>void, reject:(error:any)=>void) => {
+                child_process.exec(command, (error, stdout, stderr)=> {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        var list = stdout.toString("utf8").split("\0").filter(str => str.length !== 0);
+                        var resultList:IFileInfo[] = list.map(str=> {
+                            var matches = str.match(/^([0-9]+)\s([^\s]+)\s([0-9a-f]+)\t(.+)$/);
+                            return {
+                                gitDir: this.path,
+                                ref: ref,
+                                permission: matches[1],
+                                type: matches[2],
+                                hash: matches[3],
+                                path: matches[4]
+                            };
+                        });
+                        resolve(resultList);
+                    }
+                });
             });
         });
     }
@@ -73,6 +75,22 @@ export class FSGit {
 
     exists(path:string):Promise<boolean> {
         return this.filelist().then(list=> list.some(data => data.path === path));
+    }
+
+    revParse(ref:string):Promise<string> {
+        var command = this._buildCommand("rev-parse", ref);
+
+        return new Promise((resolve:(value?:any)=>void, reject:(error:any)=>void)=> {
+            child_process.exec(command, (error, stdout, stderr)=> {
+                if (error) {
+                    console.log(command);
+                    reject(error);
+                } else {
+                    var list = stdout.toString("utf8").split("\n").filter(str => str.length !== 0);
+                    resolve(list[0]);
+                }
+            });
+        });
     }
 
     _buildCommand(...args:string[]):string {
