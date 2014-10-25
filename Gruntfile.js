@@ -84,9 +84,7 @@ module.exports = function (grunt) {
                     // client test
                     '<%= opt.client.jsTestOut %>/*.js',
                     '<%= opt.client.jsTestOut %>/*.js.map',
-                    '<%= opt.client.jsTestOut %>/*.d.ts',
-                    // peg.js
-                    '<%= opt.client.peg %>/grammar.js'
+                    '<%= opt.client.jsTestOut %>/*.d.ts'
                 ]
             },
             tsd: {
@@ -98,32 +96,14 @@ module.exports = function (grunt) {
                 ]
             }
         },
-        replace: {
-            definitions: {
-                src: ['<%= opt.client.jsMainOut %>/fs.d.ts'],
-                dest: 'fs-git.d.ts',
-                replacements: [
-                    {
-                        from: /^\/\/\/.*$/gm,
-                        to: ''
-                    },
-                    {
-                        from: /declare /gm,
-                        to: ''
-                    },
-                    {
-                        from: /export /gm,
-                        to: ''
-                    },
-                    {
-                        from: /^/g,
-                        to: '\ndeclare module "fs-git" {\n'
-                    },
-                    {
-                        from: /$/g,
-                        to: '\n}\n'
-                    }
-                ]
+        dts_bundle: {
+            build: {
+                options: {
+                    name: "fs-git",
+                    main: "lib/fs.d.ts",
+                    baseDir: "",
+                    out: "fs-git.d.ts"
+                }
             }
         },
         mochaTest: {
@@ -155,7 +135,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask(
         'default',
-        ['ts:clientMain', 'tslint']);
+        ['ts:clientMain', 'tslint', 'dts_bundle']);
 
     grunt.registerTask(
         'test',

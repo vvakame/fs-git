@@ -5,6 +5,9 @@
   "private": false,
   "description": "fs module like api for git repotiroy",
   "main": "./index",
+  "typescript": {
+    "definition": "fs-git.d.ts"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/vvakame/fs-git.git"
@@ -27,8 +30,9 @@
     "espower-loader": "0.9.1",
     "grunt": "0.4.5",
     "grunt-contrib-clean": "0.6.0",
-    "grunt-text-replace": "0.3.12",
+    "grunt-dts-bundle": "0.2.0",
     "grunt-mocha-test": "0.12.2",
+    "grunt-text-replace": "0.3.12",
     "grunt-ts": "1.12.1",
     "grunt-tsd": "0.1.0",
     "grunt-tslint": "0.4.2",
