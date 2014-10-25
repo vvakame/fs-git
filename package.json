@@ -24,22 +24,21 @@
     "ypromise": "0.2.3"
   },
   "devDependencies": {
-    "espower-loader": "0.7.1",
+    "espower-loader": "0.9.1",
     "grunt": "0.4.5",
     "grunt-contrib-clean": "0.6.0",
     "grunt-text-replace": "0.3.12",
-    "grunt-mocha": "0.4.11",
-    "grunt-mocha-test": "0.11.0",
-    "grunt-ts": "1.11.6",
+    "grunt-mocha-test": "0.12.2",
+    "grunt-ts": "1.12.1",
     "grunt-tsd": "0.1.0",
     "grunt-tslint": "0.4.2",
-    "grunt-typedoc": "0.1.1",
-    "load-grunt-tasks": "0.6.0",
-    "mocha": "1.21.4",
-    "power-assert": "0.7.2",
+    "grunt-typedoc": "0.2.1",
+    "load-grunt-tasks": "1.0.0",
+    "mocha": "2.0.1",
+    "power-assert": "0.9.1",
     "source-map-support": "^0.2.7",
-    "time-grunt": "0.4.0",
-    "typescript": "1.0.1"
+    "time-grunt": "1.0.0",
+    "typescript": "1.1.0-1"
   },
   "directories": {
     "test": "test"

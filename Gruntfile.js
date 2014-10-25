@@ -27,14 +27,12 @@ module.exports = function (grunt) {
             },
             clientMain: {
                 src: ['<%= opt.client.tsMain %>/fs.ts'],
-                out: '<%= opt.client.jsMainOut %>/fs.js',
                 options: {
                     declaration: true
                 }
             },
             clientTest: {
-                src: ['<%= opt.client.tsTest %>/main_spec.ts'],
-                out: '<%= opt.client.jsTestOut %>/main_spec.js'
+                src: ['<%= opt.client.tsTest %>/main_spec.ts']
             }
         },
         tslint: {
