@@ -5,9 +5,7 @@
 
 import child_process = require("child_process");
 
-/* tslint:disable:variable-name */
-var Promise:typeof Promise = require("ypromise");
-/* tslint:enable:variable-name */
+require("es6-promise").polyfill();
 
 try {
     // optional

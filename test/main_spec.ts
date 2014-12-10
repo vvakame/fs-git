@@ -2,7 +2,7 @@
 /// <reference path="../typings/es6-promise/es6-promise.d.ts" />
 
 /// <reference path="../typings/mocha/mocha.d.ts" />
-/// <reference path="../typings/assert/assert.d.ts" />
+/// <reference path="../typings/power-assert/power-assert.d.ts" />
 
 import assert = require("power-assert");
 import fsgit = require("../lib/fs");
