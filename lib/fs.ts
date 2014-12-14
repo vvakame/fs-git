@@ -23,16 +23,16 @@ export class FSGit {
     constructor(public path:string, public ref = "master") {
     }
 
-    filelist():Promise<IFileInfo[]> {
+    filelist():Promise<FileInfo[]> {
         return this.revParse(this.ref).then(ref=> {
             var command = this._buildCommand("ls-tree", "-r", "-z", "--full-name", this.ref);
-            return new Promise((resolve:(value:IFileInfo[])=>void, reject:(error:any)=>void) => {
+            return new Promise((resolve:(value:FileInfo[])=>void, reject:(error:any)=>void) => {
                 child_process.exec(command, (error, stdout, stderr)=> {
                     if (error) {
                         reject(error);
                     } else {
                         var list = stdout.toString("utf8").split("\0").filter(str => str.length !== 0);
-                        var resultList:IFileInfo[] = list.map(str=> {
+                        var resultList:FileInfo[] = list.map(str=> {
                             var matches = str.match(/^([0-9]+)\s([^\s]+)\s([0-9a-f]+)\t(.+)$/);
                             return {
                                 gitDir: this.path,
@@ -96,7 +96,7 @@ export class FSGit {
     }
 }
 
-export interface IFileInfo {
+export interface FileInfo {
     gitDir: string;
     ref: string;
     permission: string;

@@ -6,7 +6,7 @@ declare module 'fs-git' {
         path: string;
         ref: string;
         constructor(path: string, ref?: string);
-        filelist(): Promise<IFileInfo[]>;
+        filelist(): Promise<FileInfo[]>;
         readFile(path: string): Promise<Buffer>;
         readFile(path: string, opts: {
             encoding: string;
@@ -15,7 +15,7 @@ declare module 'fs-git' {
         revParse(ref: string): Promise<string>;
         _buildCommand(...args: string[]): string;
     }
-    export interface IFileInfo {
+    export interface FileInfo {
         gitDir: string;
         ref: string;
         permission: string;
