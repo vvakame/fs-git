@@ -5,6 +5,7 @@
 
 # for npm
 node_modules/
+npm-shrinkwrap.json
 
 # for grunt
 typings/
@@ -17,8 +18,10 @@ test/
 .gitignore
 .editorconfig
 .travis.yml
+circle.yml
 setup.sh
 Gruntfile.js
+tslint.json
 
 test-results.xml
 npm-debug.log
