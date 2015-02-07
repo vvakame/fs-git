@@ -6,7 +6,7 @@ declare module 'fs-git' {
         path: string;
         ref: string;
         constructor(path: string, ref?: string);
-        filelist(): Promise<FileInfo[]>;
+        fileList(): Promise<FileInfo[]>;
         readFile(path: string): Promise<Buffer>;
         readFile(path: string, opts: {
             encoding: string;

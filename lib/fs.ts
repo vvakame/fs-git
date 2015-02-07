@@ -23,7 +23,7 @@ export class FSGit {
     constructor(public path:string, public ref = "master") {
     }
 
-    filelist():Promise<FileInfo[]> {
+    fileList():Promise<FileInfo[]> {
         return this.revParse(this.ref).then(ref=> {
             var command = this._buildCommand("ls-tree", "-r", "-z", "--full-name", this.ref);
             return new Promise((resolve:(value:FileInfo[])=>void, reject:(error:any)=>void) => {
@@ -72,7 +72,7 @@ export class FSGit {
     }
 
     exists(path:string):Promise<boolean> {
-        return this.filelist().then(list=> list.some(data => data.path === path));
+        return this.fileList().then(list=> list.some(data => data.path === path));
     }
 
     revParse(ref:string):Promise<string> {

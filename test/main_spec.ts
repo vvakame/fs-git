@@ -36,7 +36,7 @@ describe("fs-git", ()=> {
     matrix.forEach(dirInfo => {
         it("open master branch in " + dirInfo.name, ()=> {
             return fsgit.open(dirInfo.gitDir, "master").then(fs => {
-                var filelist = fs.filelist().then(files=> {
+                var fileList = fs.fileList().then(files=> {
                     assert(files.length !== 0);
                     assert(files.filter(file=> file.path === "master-branch-only.js").length === 1);
                 });
@@ -49,13 +49,13 @@ describe("fs-git", ()=> {
                 var exists2 = fs.exists("develop-branch-only.js").then(exists=> {
                     assert(exists === false);
                 });
-                return Promise.all([filelist, readFile, exists1, exists2]);
+                return Promise.all([fileList, readFile, exists1, exists2]);
             });
         });
 
         it("open develop branch in " + dirInfo.name, ()=> {
             return fsgit.open(dirInfo.gitDir, "develop").then(fs => {
-                var filelist = fs.filelist().then(files=> {
+                var fileList = fs.fileList().then(files=> {
                     assert(files.length !== 0);
                     assert(files.filter(file=> file.path === "develop-branch-only.js").length === 1);
                 });
@@ -68,13 +68,13 @@ describe("fs-git", ()=> {
                 var exists2 = fs.exists("master-branch-only.js").then(exists=> {
                     assert(exists === false);
                 });
-                return Promise.all([filelist, readFile, exists1, exists2]);
+                return Promise.all([fileList, readFile, exists1, exists2]);
             });
         });
 
         it("open test-tag tag in " + dirInfo.name, ()=> {
             return fsgit.open(dirInfo.gitDir, "test-tag").then(fs => {
-                var filelist = fs.filelist().then(files=> {
+                var fileList = fs.fileList().then(files=> {
                     assert(files.length !== 0);
                     assert(files.filter(file=> file.path === "subdir/test.txt").length === 1);
                 });
@@ -87,13 +87,13 @@ describe("fs-git", ()=> {
                 var exists2 = fs.exists("master-branch-only.js").then(exists=> {
                     assert(exists === false);
                 });
-                return Promise.all([filelist, readFile, exists1, exists2]);
+                return Promise.all([fileList, readFile, exists1, exists2]);
             });
         });
 
         it("open specific ref in " + dirInfo.name, ()=> {
             return fsgit.open(dirInfo.gitDir, "b41735").then(fs => {
-                var filelist = fs.filelist().then(files=> {
+                var fileList = fs.fileList().then(files=> {
                     assert(files.length !== 0);
                     assert(files.filter(file=> file.path === "subdir/test.txt").length === 1);
                 });
@@ -106,7 +106,7 @@ describe("fs-git", ()=> {
                 var exists2 = fs.exists("master-branch-only.js").then(exists=> {
                     assert(exists === false);
                 });
-                return Promise.all([filelist, readFile, exists1, exists2]);
+                return Promise.all([fileList, readFile, exists1, exists2]);
             });
         });
     });
