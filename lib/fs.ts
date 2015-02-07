@@ -24,30 +24,7 @@ export class FSGit {
     }
 
     fileList():Promise<FileInfo[]> {
-        return this.revParse(this.ref).then(ref=> {
-            var command = this._buildCommand("ls-tree", "-r", "-z", "--full-name", this.ref);
-            return new Promise((resolve:(value:FileInfo[])=>void, reject:(error:any)=>void) => {
-                child_process.exec(command, (error, stdout, stderr)=> {
-                    if (error) {
-                        reject(error);
-                    } else {
-                        var list = stdout.toString("utf8").split("\0").filter(str => str.length !== 0);
-                        var resultList:FileInfo[] = list.map(str=> {
-                            var matches = str.match(/^([0-9]+)\s([^\s]+)\s([0-9a-f]+)\t(.+)$/);
-                            return {
-                                gitDir: this.path,
-                                ref: ref,
-                                permission: matches[1],
-                                type: matches[2],
-                                hash: matches[3],
-                                path: matches[4]
-                            };
-                        });
-                        resolve(resultList);
-                    }
-                });
-            });
-        });
+        return this._lsTree(this.ref, ".");
     }
 
     readFile(path:string):Promise<Buffer>;
@@ -87,6 +64,33 @@ export class FSGit {
                     var list = stdout.toString("utf8").split("\n").filter(str => str.length !== 0);
                     resolve(list[0]);
                 }
+            });
+        });
+    }
+
+    _lsTree(ref = this.ref, path = "."):Promise<FileInfo[]> {
+        return this.revParse(ref).then(ref=> {
+            var command = this._buildCommand("ls-tree", "-r", "-z", "--full-name", ref, path);
+            return new Promise((resolve:(value:FileInfo[])=>void, reject:(error:any)=>void) => {
+                child_process.exec(command, (error, stdout, stderr)=> {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        var list = stdout.toString("utf8").split("\0").filter(str => str.length !== 0);
+                        var resultList:FileInfo[] = list.map(str=> {
+                            var matches = str.match(/^([0-9]+)\s([^\s]+)\s([0-9a-f]+)\t(.+)$/);
+                            return {
+                                gitDir: this.path,
+                                ref: ref,
+                                permission: matches[1],
+                                type: matches[2],
+                                hash: matches[3],
+                                path: matches[4]
+                            };
+                        });
+                        resolve(resultList);
+                    }
+                });
             });
         });
     }

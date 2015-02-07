@@ -13,6 +13,7 @@ declare module 'fs-git' {
         }): Promise<string>;
         exists(path: string): Promise<boolean>;
         revParse(ref: string): Promise<string>;
+        _lsTree(ref?: string, path?: string): Promise<FileInfo[]>;
         _buildCommand(...args: string[]): string;
     }
     export interface FileInfo {
