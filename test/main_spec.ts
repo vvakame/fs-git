@@ -40,6 +40,9 @@ describe("fs-git", ()=> {
                     assert(files.length !== 0);
                     assert(files.filter(file=> file.path === "master-branch-only.js").length === 1);
                 });
+                var file = fs.file("subdir2/master-branch-only.js").then(fileInfo=> {
+                    assert(fileInfo.type === "blob");
+                });
                 var readFile = fs.readFile("subdir2/master-branch-only.js", {encoding: "utf8"}).then(content=> {
                     assert(typeof content === "string");
                 });
@@ -49,7 +52,7 @@ describe("fs-git", ()=> {
                 var exists2 = fs.exists("develop-branch-only.js").then(exists=> {
                     assert(exists === false);
                 });
-                return Promise.all([fileList, readFile, exists1, exists2]);
+                return Promise.all([fileList, file, readFile, exists1, exists2]);
             });
         });
 
@@ -58,6 +61,9 @@ describe("fs-git", ()=> {
                 var fileList = fs.fileList().then(files=> {
                     assert(files.length !== 0);
                     assert(files.filter(file=> file.path === "develop-branch-only.js").length === 1);
+                });
+                var file = fs.file("subdir/develop-branch-only.js").then(fileInfo=> {
+                    assert(fileInfo.type === "blob");
                 });
                 var readFile = fs.readFile("subdir/develop-branch-only.js", {encoding: "utf8"}).then(content=> {
                     assert(typeof content === "string");
@@ -68,7 +74,7 @@ describe("fs-git", ()=> {
                 var exists2 = fs.exists("master-branch-only.js").then(exists=> {
                     assert(exists === false);
                 });
-                return Promise.all([fileList, readFile, exists1, exists2]);
+                return Promise.all([fileList, file, readFile, exists1, exists2]);
             });
         });
 
@@ -78,6 +84,9 @@ describe("fs-git", ()=> {
                     assert(files.length !== 0);
                     assert(files.filter(file=> file.path === "subdir/test.txt").length === 1);
                 });
+                var file = fs.file("subdir/test.txt").then(fileInfo=> {
+                    assert(fileInfo.type === "blob");
+                });
                 var readFile = fs.readFile("subdir/test.txt", {encoding: "utf8"}).then(content=> {
                     assert(typeof content === "string");
                 });
@@ -87,7 +96,7 @@ describe("fs-git", ()=> {
                 var exists2 = fs.exists("master-branch-only.js").then(exists=> {
                     assert(exists === false);
                 });
-                return Promise.all([fileList, readFile, exists1, exists2]);
+                return Promise.all([fileList, file, readFile, exists1, exists2]);
             });
         });
 
@@ -97,6 +106,9 @@ describe("fs-git", ()=> {
                     assert(files.length !== 0);
                     assert(files.filter(file=> file.path === "subdir/test.txt").length === 1);
                 });
+                var file = fs.file("subdir/test.txt").then(fileInfo=> {
+                    assert(fileInfo.type === "blob");
+                });
                 var readFile = fs.readFile("subdir/test.txt", {encoding: "utf8"}).then(content=> {
                     assert(typeof content === "string");
                 });
@@ -106,7 +118,7 @@ describe("fs-git", ()=> {
                 var exists2 = fs.exists("master-branch-only.js").then(exists=> {
                     assert(exists === false);
                 });
-                return Promise.all([fileList, readFile, exists1, exists2]);
+                return Promise.all([fileList, file, readFile, exists1, exists2]);
             });
         });
     });

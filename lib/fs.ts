@@ -23,6 +23,18 @@ export class FSGit {
     constructor(public path:string, public ref = "master") {
     }
 
+    file(path:string):Promise<FileInfo> {
+        return this._lsTree(this.ref, path)
+            .then(fileList => {
+                var fileInfo = fileList.filter(fileInfo => fileInfo.path === path)[0];
+                if (fileInfo) {
+                    return fileInfo;
+                } else {
+                    throw new Error(path + " is not exists");
+                }
+            });
+    }
+
     fileList():Promise<FileInfo[]> {
         return this._lsTree(this.ref, ".");
     }
