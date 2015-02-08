@@ -1,3 +1,17 @@
+<a name="0.4.1"></a>
+### 0.4.1 (2015-02-08)
+
+
+#### Bug Fixes
+
+* **fs-git:** change maxBuffer size 200KB to 1MB ([a3ceaede](https://github.com/vvakame/fs-git/commit/a3ceaede79018365e36895d1a5d7f61072210e4d))
+
+
+#### Features
+
+* **fs-git:** move feature of es6 polyfill main code to test code ([efa60277](https://github.com/vvakame/fs-git/commit/efa602771346b147db9c4e9703da47c4c8327b58))
+
+
 <a name="0.4.0"></a>
 ## 0.4.0 (2015-02-08)
 
