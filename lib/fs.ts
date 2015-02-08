@@ -19,6 +19,8 @@ export function open(path:string, ref?:string):Promise<FSGit> {
     return Promise.resolve(new FSGit(path, ref));
 }
 
+var maxBuffer = 1 * 1024 * 1024; // Node.js default 200*1024
+
 export class FSGit {
     constructor(public path:string, public ref = "master") {
     }
@@ -42,7 +44,7 @@ export class FSGit {
     showRef():Promise<RefInfo[]> {
         var command = this._buildCommand("show-ref");
         return new Promise((resolve:(value:RefInfo[])=>void, reject:(error:any)=>void) => {
-            child_process.exec(command, (error, stdout, stderr)=> {
+            child_process.exec(command, {maxBuffer: maxBuffer}, (error, stdout, stderr)=> {
                 if (error) {
                     reject(error);
                 } else {
@@ -68,7 +70,7 @@ export class FSGit {
     readFile(path:string, opts?:{encoding: string;}):Promise<any> {
         var command = this._buildCommand("show", this.ref + ":" + path);
         return new Promise((resolve:(value:any)=>void, reject:(error:any)=>void) => {
-            child_process.exec(command, (error, stdout, stderr)=> {
+            child_process.exec(command, {maxBuffer: maxBuffer}, (error, stdout, stderr)=> {
                 if (error) {
                     reject(error);
                 } else {
@@ -90,7 +92,7 @@ export class FSGit {
         var command = this._buildCommand("rev-parse", ref);
 
         return new Promise((resolve:(value?:any)=>void, reject:(error:any)=>void)=> {
-            child_process.exec(command, (error, stdout, stderr)=> {
+            child_process.exec(command, {maxBuffer: maxBuffer}, (error, stdout, stderr)=> {
                 if (error) {
                     console.log(command);
                     reject(error);
@@ -106,7 +108,7 @@ export class FSGit {
         return this.revParse(ref).then(ref=> {
             var command = this._buildCommand("ls-tree", "-r", "-z", "--full-name", ref, path);
             return new Promise((resolve:(value:FileInfo[])=>void, reject:(error:any)=>void) => {
-                child_process.exec(command, (error, stdout, stderr)=> {
+                child_process.exec(command, {maxBuffer: maxBuffer}, (error, stdout, stderr)=> {
                     if (error) {
                         reject(error);
                     } else {
