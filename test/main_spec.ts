@@ -34,6 +34,18 @@ describe("fs-git", ()=> {
         }
     ];
     matrix.forEach(dirInfo => {
+        it("show refs in " + dirInfo.name, ()=> {
+            return fsgit.open(dirInfo.gitDir, "master").then(fs => {
+                fs.showRef().then(refs => {
+                    assert(refs.length !== 0);
+                    refs.forEach(ref => {
+                        assert(/^[0-9a-f]+$/.test(ref.ref));
+                        assert(/^refs\//.test(ref.name));
+                    });
+                });
+            });
+        });
+
         it("open master branch in " + dirInfo.name, ()=> {
             return fsgit.open(dirInfo.gitDir, "master").then(fs => {
                 var fileList = fs.fileList().then(files=> {

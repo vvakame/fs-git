@@ -8,6 +8,7 @@ declare module 'fs-git' {
         constructor(path: string, ref?: string);
         file(path: string): Promise<FileInfo>;
         fileList(): Promise<FileInfo[]>;
+        showRef(): Promise<RefInfo[]>;
         readFile(path: string): Promise<Buffer>;
         readFile(path: string, opts: {
             encoding: string;
@@ -24,6 +25,11 @@ declare module 'fs-git' {
         type: string;
         hash: string;
         path: string;
+    }
+    export interface RefInfo {
+        gitDir: string;
+        ref: string;
+        name: string;
     }
 }
 

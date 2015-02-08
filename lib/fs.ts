@@ -39,6 +39,28 @@ export class FSGit {
         return this._lsTree(this.ref, ".");
     }
 
+    showRef():Promise<RefInfo[]> {
+        var command = this._buildCommand("show-ref");
+        return new Promise((resolve:(value:RefInfo[])=>void, reject:(error:any)=>void) => {
+            child_process.exec(command, (error, stdout, stderr)=> {
+                if (error) {
+                    reject(error);
+                } else {
+                    var list = stdout.toString("utf8").split("\n").filter(line => !!line);
+                    var resultList:RefInfo[] = list.map(str=> {
+                        var columns = str.split(" ", 2);
+                        return {
+                            gitDir: this.path,
+                            ref: columns[0],
+                            name: columns[1]
+                        };
+                    });
+                    resolve(resultList);
+                }
+            });
+        });
+    }
+
     readFile(path:string):Promise<Buffer>;
 
     readFile(path:string, opts:{encoding: string;}):Promise<string>;
@@ -119,4 +141,10 @@ export interface FileInfo {
     type: string;
     hash: string;
     path: string;
+}
+
+export interface RefInfo {
+    gitDir: string;
+    ref: string;
+    name: string;
 }
