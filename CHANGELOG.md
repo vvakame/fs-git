@@ -1,3 +1,12 @@
+<a name="0.4.0"></a>
+## 0.4.0 (2015-02-08)
+
+
+#### Features
+
+* **fs-git:** add showRef method ([f94480a8](https://github.com/vvakame/fs-git/commit/f94480a846bc660161aa181bcdae971c47082482))
+
+
 <a name="0.3.0"></a>
 ## 0.3.0 (2015-02-07)
 
