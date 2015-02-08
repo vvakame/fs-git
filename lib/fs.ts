@@ -3,15 +3,9 @@
 
 "use strict";
 
+// if you use Node.js 0.10, you need exec `require("es6-promise").polyfill();`
+
 import child_process = require("child_process");
-
-require("es6-promise").polyfill();
-
-try {
-    // optional
-    require("source-map-support").install();
-} catch (e) {
-}
 
 export function open(path:string, ref?:string):Promise<FSGit> {
     "use strict";
