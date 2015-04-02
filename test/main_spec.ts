@@ -24,9 +24,12 @@ describe("fs-git", ()=> {
             done();
             return;
         }
-        child_process.exec("git clone test/fixture/bare.git test/fixture/vanilla", ()=> {
-            child_process.exec("git checkout -b develop origin/develop", {cwd: "test/fixture/vanilla"}, ()=> {
-                done();
+        child_process.exec("git clone test/fixture/bare.git test/fixture/vanilla", err=> {
+            if (err) {
+                done(err);
+            }
+            child_process.exec("git checkout -b develop origin/develop", {cwd: "test/fixture/vanilla"}, err=> {
+                done(err);
             });
         });
     });
