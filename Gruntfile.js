@@ -101,6 +101,7 @@ module.exports = function (grunt) {
             test: {
                 options: {
                     reporter: 'spec',
+                    timeout: 10000,
                     require: [
                         function () {
                             require('espower-loader')({
