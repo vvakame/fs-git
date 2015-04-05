@@ -32,7 +32,7 @@ module.exports = function (grunt) {
                 }
             },
             clientTest: {
-                src: ['<%= opt.client.tsTest %>/main_spec.ts']
+                src: ['<%= opt.client.tsTest %>/mainSpec.ts']
             }
         },
         tslint: {
@@ -115,7 +115,7 @@ module.exports = function (grunt) {
                     ]
                 },
                 src: [
-                    '<%= opt.client.jsTestOut %>/**/*_spec.js'
+                    '<%= opt.client.jsTestOut %>/**/*Spec.js'
                 ]
             }
         },
