@@ -26,7 +26,7 @@ export class FSGit {
                 if (fileInfo) {
                     return fileInfo;
                 } else {
-                    throw new Error(path + " is not exists");
+                    throw new Error(`${path} is not exists`);
                 }
             });
     }
@@ -126,7 +126,7 @@ export class FSGit {
     }
 
     _buildCommand(...args:string[]):string {
-        return "git --git-dir=" + this.path + " " + args.join(" ");
+        return `git --git-dir=${this.path} ${args.join(" ")}`;
     }
 }
 
