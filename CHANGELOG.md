@@ -1,3 +1,13 @@
+<a name="0.5.1"></a>
+## [0.5.1](https://github.com/vvakame/fs-git/compare/0.5.0...v0.5.1) (2015-09-22)
+
+
+### Bug Fixes
+
+* **fs-git:** rename lib/fs.ts to lib/index.ts ([c1ed01c](https://github.com/vvakame/fs-git/commit/c1ed01c))
+
+
+
 <a name="0.4.1"></a>
 ## [0.4.1](https://github.com/vvakame/fs-git/compare/0.4.1...v0.4.1) (2015-09-22)
 
