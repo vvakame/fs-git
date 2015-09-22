@@ -25,7 +25,7 @@
         "./node_modules/typescript/lib/lib.es6.d.ts"
     ],
     "files": [
-        "./lib/fs.ts",
+        "./lib/index.ts",
         "./test/mainSpec.ts",
         "./typings/bundle.d.ts",
         "./typings/empower/empower.d.ts",
