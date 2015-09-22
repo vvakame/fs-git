@@ -1,4 +1,20 @@
 <a name="0.4.1"></a>
+## [0.4.1](https://github.com/vvakame/fs-git/compare/0.4.1...v0.4.1) (2015-09-22)
+
+
+### Bug Fixes
+
+* **fs-git:** fix test before expression ([d9a200f](https://github.com/vvakame/fs-git/commit/d9a200f))
+* **fs-git:** set mocha timeout to 10000ms ([859b307](https://github.com/vvakame/fs-git/commit/859b307))
+
+### Features
+
+* **ci:** add appveyor.yml ([53d949e](https://github.com/vvakame/fs-git/commit/53d949e))
+* **fs-git:** update dependencies & switch to tsconfig.json oriented style ([bf4e25f](https://github.com/vvakame/fs-git/commit/bf4e25f))
+
+
+
+<a name="0.4.1"></a>
 ### 0.4.1 (2015-02-08)
 
 
