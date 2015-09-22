@@ -6,19 +6,21 @@
     }
   ],
   "path": "typings",
+  "link": {
+    "npm": {
+      "include": true
+    }
+  },
   "bundle": "typings/bundle.d.ts",
   "dependencies": {
-    "es6-promise/es6-promise.d.ts": {
-      "ref": "32bb5fea1c1a00a0f4d44523b75849fe60e97bee"
-    },
     "node/node.d.ts": {
-      "ref": "32bb5fea1c1a00a0f4d44523b75849fe60e97bee"
+      "ref": "32029fcb4e1a3ef8968711b545d77b584435729d"
     },
     "mocha/mocha.d.ts": {
-      "ref": "32bb5fea1c1a00a0f4d44523b75849fe60e97bee"
+      "ref": "32029fcb4e1a3ef8968711b545d77b584435729d"
     },
     "power-assert/power-assert.d.ts": {
-      "ref": "32bb5fea1c1a00a0f4d44523b75849fe60e97bee"
+      "ref": "32029fcb4e1a3ef8968711b545d77b584435729d"
     }
   }
 }

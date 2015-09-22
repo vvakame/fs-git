@@ -1,11 +1,8 @@
-/// <reference path="../typings/node/node.d.ts" />
-/// <reference path="../typings/es6-promise/es6-promise.d.ts" />
-
 "use strict";
 
 // if you use Node.js 0.10, you need exec `require("es6-promise").polyfill();`
 
-import child_process = require("child_process");
+import * as child_process from "child_process";
 
 export function open(path:string, ref?:string):Promise<FSGit> {
     "use strict";

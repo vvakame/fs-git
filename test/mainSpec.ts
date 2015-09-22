@@ -1,8 +1,4 @@
-/// <reference path="../typings/node/node.d.ts" />
-/// <reference path="../typings/es6-promise/es6-promise.d.ts" />
-
-/// <reference path="../typings/mocha/mocha.d.ts" />
-/// <reference path="../typings/power-assert/power-assert.d.ts" />
+"use strict";
 
 require("es6-promise").polyfill();
 
@@ -12,11 +8,11 @@ try {
 } catch (e) {
 }
 
-import assert = require("power-assert");
-import fsgit = require("../lib/fs");
+import * as assert from "power-assert";
+import * as fsgit from "../lib/fs";
 
-import fs = require("fs");
-import child_process = require("child_process");
+import * as fs from "fs";
+import * as child_process from "child_process";
 
 describe("fs-git", ()=> {
     before(done => {
