@@ -1,3 +1,13 @@
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/vvakame/fs-git/compare/0.5.1...v1.0.0) (2016-02-21)
+
+
+### Features
+
+* **desp:** update dependencies ([783c56e](https://github.com/vvakame/fs-git/commit/783c56e))
+
+
+
 <a name="0.5.1"></a>
 ## [0.5.1](https://github.com/vvakame/fs-git/compare/0.5.0...v0.5.1) (2015-09-22)
 
