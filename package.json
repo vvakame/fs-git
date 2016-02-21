@@ -1,7 +1,7 @@
 {
   "name": "fs-git",
   "author": "vvakame",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "description": "fs module like api for git repotiroy",
   "main": "./index",
