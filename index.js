@@ -1,1 +1,1 @@
-module.exports = require('./lib/fs');
+module.exports = require('./lib/');

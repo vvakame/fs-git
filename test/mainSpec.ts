@@ -9,7 +9,7 @@ try {
 }
 
 import * as assert from "power-assert";
-import * as fsgit from "../lib/fs";
+import * as fsgit from "../lib/";
 
 import * as fs from "fs";
 import * as child_process from "child_process";

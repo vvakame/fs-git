@@ -27,7 +27,7 @@ module.exports = function (grunt) {
         },
         tslint: {
             options: {
-                configuration: grunt.file.readJSON("tslint.json")
+                configuration: "tslint.json"
             },
             files: {
                 src: [

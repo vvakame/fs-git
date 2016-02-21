@@ -34,5 +34,8 @@
         "./typings/power-assert-formatter/power-assert-formatter.d.ts",
         "./typings/power-assert/power-assert.d.ts",
         "./node_modules/typescript/lib/lib.es6.d.ts"
-    ]
+    ],
+    "atom": {
+        "rewriteTsconfig": true
+    }
 }
