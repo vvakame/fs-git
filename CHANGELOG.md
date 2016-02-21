@@ -1,3 +1,14 @@
+<a name="1.0.1"></a>
+## [1.0.1](https://github.com/vvakame/fs-git/compare/v1.0.0...v1.0.1) (2016-02-21)
+
+v1.0.0 is deprecated. it is not contains lib/*.js . sorry!
+
+### Features
+
+* **ci:** update node.js version 4.3 in CI ([6182887](https://github.com/vvakame/fs-git/commit/6182887))
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/vvakame/fs-git/compare/0.5.1...v1.0.0) (2016-02-21)
 
@@ -71,4 +82,3 @@
 
 * rename FSGit.filelist to FSGit.fileList
  ([268ba3f0](https://github.com/vvakame/fs-git/commit/268ba3f088a5351e5267e8fa23f30f5fff447722))
-
