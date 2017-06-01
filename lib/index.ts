@@ -1,12 +1,6 @@
-"use strict";
-
-// if you use Node.js 0.10, you need exec `require("es6-promise").polyfill();`
-
 import * as child_process from "child_process";
 
 export function open(path: string, ref?: string): Promise<FSGit> {
-    "use strict";
-
     return Promise.resolve(new FSGit(path, ref));
 }
 
@@ -35,17 +29,17 @@ export class FSGit {
     showRef(): Promise<RefInfo[]> {
         let command = this._buildCommand("show-ref");
         return new Promise((resolve: (value: RefInfo[]) => void, reject: (error: any) => void) => {
-            child_process.exec(command, { maxBuffer: maxBuffer }, (error, stdout, stderr) => {
+            child_process.execFile(command.base, command.args, { encoding: "buffer", maxBuffer: maxBuffer }, (error, stdout, stderr) => {
                 if (error) {
                     reject(error);
                 } else {
                     let list = stdout.toString("utf8").split("\n").filter(line => !!line);
-                    let resultList: RefInfo[] = list.map(str=> {
+                    let resultList: RefInfo[] = list.map(str => {
                         let columns = str.split(" ", 2);
                         return {
                             gitDir: this.path,
                             ref: columns[0],
-                            name: columns[1]
+                            name: columns[1],
                         };
                     });
                     resolve(resultList);
@@ -61,7 +55,7 @@ export class FSGit {
     readFile(path: string, opts?: { encoding: string; }): Promise<any> {
         let command = this._buildCommand("show", this.ref + ":" + path);
         return new Promise((resolve: (value: any) => void, reject: (error: any) => void) => {
-            child_process.exec(command, { maxBuffer: maxBuffer }, (error, stdout, stderr) => {
+            child_process.execFile(command.base, command.args, { encoding: "buffer", maxBuffer: maxBuffer }, (error, stdout, stderr) => {
                 if (error) {
                     reject(error);
                 } else {
@@ -76,14 +70,14 @@ export class FSGit {
     }
 
     exists(path: string): Promise<boolean> {
-        return this.fileList().then(list=> list.some(data => data.path === path));
+        return this.fileList().then(list => list.some(data => data.path === path));
     }
 
     revParse(ref: string): Promise<string> {
         let command = this._buildCommand("rev-parse", ref);
 
         return new Promise((resolve: (value?: any) => void, reject: (error: any) => void) => {
-            child_process.exec(command, { maxBuffer: maxBuffer }, (error, stdout, stderr) => {
+            child_process.execFile(command.base, command.args, { encoding: "buffer", maxBuffer: maxBuffer }, (error, stdout, stderr) => {
                 if (error) {
                     console.log(command);
                     reject(error);
@@ -96,15 +90,15 @@ export class FSGit {
     }
 
     _lsTree(ref = this.ref, path = "."): Promise<FileInfo[]> {
-        return this.revParse(ref).then(ref=> {
+        return this.revParse(ref).then(ref => {
             let command = this._buildCommand("ls-tree", "-r", "-z", "--full-name", ref, path);
             return new Promise((resolve: (value: FileInfo[]) => void, reject: (error: any) => void) => {
-                child_process.exec(command, { maxBuffer: maxBuffer }, (error, stdout, stderr) => {
+                child_process.execFile(command.base, command.args, { encoding: "buffer", maxBuffer: maxBuffer }, (error, stdout, stderr) => {
                     if (error) {
                         reject(error);
                     } else {
                         let list = stdout.toString("utf8").split("\0").filter(str => str.length !== 0);
-                        let resultList: FileInfo[] = list.map(str=> {
+                        let resultList: FileInfo[] = list.map(str => {
                             let matches = str.match(/^([0-9]+)\s([^\s]+)\s([0-9a-f]+)\t(.+)$/);
                             return {
                                 gitDir: this.path,
@@ -112,7 +106,7 @@ export class FSGit {
                                 permission: matches[1],
                                 type: matches[2],
                                 hash: matches[3],
-                                path: matches[4]
+                                path: matches[4],
                             };
                         });
                         resolve(resultList);
@@ -122,8 +116,11 @@ export class FSGit {
         });
     }
 
-    _buildCommand(...args: string[]): string {
-        return `git --git-dir=${this.path} ${args.join(" ") }`;
+    _buildCommand(...args: string[]): { base: string; args: string[]; } {
+        return {
+            base: "git",
+            args: [`--git-dir=${this.path}`, ...args],
+        };
     }
 }
 
